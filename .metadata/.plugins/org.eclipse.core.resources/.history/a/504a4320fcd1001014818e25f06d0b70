@@ -1,0 +1,37 @@
+package br.edu.universidade.repositorio_extensao.controller;
+
+import br.edu.universidade.repositorio_extensao.model.AcaoDeExtensao;
+import br.edu.universidade.repositorio_extensao.service.AcaoService;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+
+// Mapeamento que será usado na URL: /repositorio-extensao/acoes
+@WebServlet("/acoes") 
+public class AcoesController extends HttpServlet {
+    // Instancia o serviço que simula o banco de dados
+    private AcaoService acaoService = new AcaoService();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        // 1. Captura parâmetros de filtro e busca da URL
+        String termoBusca = request.getParameter("busca");
+        String statusFiltro = request.getParameter("status");
+
+        // 2. Chama o serviço para obter a lista filtrada/buscada
+        List<AcaoDeExtensao> listaAcoes = acaoService.buscarAcoes(termoBusca, statusFiltro);
+
+        // 3. Define atributos na requisição para a View (JSP)
+        request.setAttribute("listaAcoes", listaAcoes);
+        request.setAttribute("termoBusca", termoBusca != null ? termoBusca : "");
+        request.setAttribute("statusFiltro", statusFiltro != null ? statusFiltro : "Todos");
+
+        // 4. Encaminha para a página JSP (Visão)
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+}

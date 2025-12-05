@@ -1,0 +1,55 @@
+package br.edu.universidade.repositorio_extensao.controller;
+
+import br.edu.universidade.repositorio_extensao.model.AcaoDeExtensao;
+import br.edu.universidade.repositorio_extensao.service.AcaoService;
+// Importações Corrigidas para Jakarta EE 10 (Servlet 6.0)
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.util.List;
+
+/**
+ * Servlet principal responsável por manipular a lógica de busca e 
+ * listagem das Ações de Extensão.
+ * Mapeado para a URL '/acoes'.
+ */
+@WebServlet("/acoes")
+public class AcoesController extends HttpServlet {
+    
+    // Instancia o serviço que contém o Mock Data e a lógica de busca.
+    // É recomendado usar 'final' para serviços no escopo do Servlet.
+    private final AcaoService acaoService = new AcaoService();
+
+    /**
+     * Trata requisições GET para exibir a lista de ações.
+     * Recebe e processa os parâmetros de busca e filtro.
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        // 1. Captura parâmetros de filtro e busca da URL (podem ser null)
+        String termoBusca = request.getParameter("busca");
+        String statusFiltro = request.getParameter("status");
+
+        // 2. Chama o serviço para obter a lista filtrada/buscada, 
+        //    usando a lógica implementada no AcaoService.java
+        List<AcaoDeExtensao> listaAcoes = acaoService.buscarAcoes(termoBusca, statusFiltro);
+
+        // 3. Define atributos na requisição para a View (JSP).
+        //    Esses atributos serão acessados pelo JSTL e Expression Language no index.jsp.
+        request.setAttribute("listaAcoes", listaAcoes);
+        
+        // Mantém os valores de busca e filtro para preencher o formulário na próxima requisição (UX).
+        request.setAttribute("termoBusca", termoBusca != null ? termoBusca : "");
+        // Define 'Todos' como default se o filtro não foi setado.
+        request.setAttribute("statusFiltro", statusFiltro != null ? statusFiltro : "Todos");
+
+        // 4. Encaminha a requisição para a página JSP (Visão).
+        //    O dispatcher precisa do caminho relativo ao webapp folder.
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+}

@@ -1,0 +1,53 @@
+package br.edu.universidade.repositorio_extensao.service;
+
+import br.edu.universidade.repositorio_extensao.model.AcaoDeExtensao;
+import br.edu.universidade.repositorio_extensao.model.Responsavel;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class AcaoService {
+
+    // Lista estática que simula o banco de dados
+    private static final List<AcaoDeExtensao> acoes = new ArrayList<>();
+    private static int nextId = 1;
+
+    // Inicializa com dados de MOCK
+    static {
+        LocalDate hoje = LocalDate.now();
+        
+        // Ação Vigente (Futura)
+        acoes.add(new AcaoDeExtensao(nextId++, "Curso de Libras Básico", "Curso introdutório de Língua Brasileira de Sinais, aberto a toda comunidade. Avaliado com 40h de extensão.", "Online (Google Meet)", new Responsavel("Profa. Ana Costa", "ana.costa@univ.br"), hoje.plusMonths(1), hoje.plusMonths(4), true, "http://link.inscricao.br/libras"));
+        
+        // Ação Vigente (Acontecendo Agora)
+        acoes.add(new AcaoDeExtensao(nextId++, "Ciclo de Palestras em Inovação", "Série de palestras sobre as últimas tendências em tecnologia e mercado de trabalho. Entrada gratuita e aberta ao público-alvo.", "Auditório Principal", new Responsavel("Prof. Carlos Dias", "carlos.dias@univ.br"), hoje.minusMonths(1), hoje.plusMonths(1), false, ""));
+        
+        // Ação Encerrada
+        acoes.add(new AcaoDeExtensao(nextId++, "Workshop de Desenvolvimento Web", "Treinamento prático e intensivo em HTML, CSS e JavaScript básico. Material didático incluso.", "Lab 305 (Bloco B)", new Responsavel("Prof. Carlos Dias", "carlos.dias@univ.br"), hoje.minusYears(1).withMonth(1), hoje.minusYears(1).withMonth(3), true, ""));
+        
+        // Outra Ação Encerrada
+        acoes.add(new AcaoDeExtensao(nextId++, "Mutirão da Saúde Comunitária", "Prestação de serviços de saúde básica em parceria com a prefeitura local. Ação social de grande impacto.", "Praça Central", new Responsavel("Dr. João Silva", "joao.silva@univ.br"), hoje.minusMonths(6), hoje.minusMonths(6), false, ""));
+    }
+
+    /**
+     * Aplica filtro e busca (simulação de WHERE/LIKE).
+     */
+    public List<AcaoDeExtensao> buscarAcoes(String termoBusca, String statusFiltro) {
+        return acoes.stream()
+                .filter(acao -> {
+                    // 1. Filtro por Status
+                    boolean statusMatch = statusFiltro == null || statusFiltro.isEmpty() || statusFiltro.equals("Todos") || acao.getStatus().equalsIgnoreCase(statusFiltro);
+
+                    // 2. Filtro por Termo de Busca (título ou descrição)
+                    boolean termoBuscaLimp = termoBusca == null || termoBusca.trim().isEmpty();
+                    
+                    boolean termoMatch = termoBuscaLimp || 
+                                         acao.getTitulo().toLowerCase().contains(termoBusca.toLowerCase()) ||
+                                         acao.getDescricao().toLowerCase().contains(termoBusca.toLowerCase());
+
+                    return statusMatch && termoMatch;
+                })
+                .collect(Collectors.toList());
+    }
+}

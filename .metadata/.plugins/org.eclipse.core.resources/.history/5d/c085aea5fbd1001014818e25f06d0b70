@@ -1,0 +1,7 @@
+package br.edu.universidade.repositorio_extensao.controller;
+
+import javax.servlet.http.HttpServlet;
+
+public class AcoesController extends HttpServlet {
+
+}

@@ -1,0 +1,57 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.header-institucional {
+    background-color: #004d99;
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-acao {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-left: 5px solid #004d99;
+    margin-bottom: 20px;
+}
+
+.card-acao:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.status-vigente {
+    background-color: #d4edda;
+    color: #155724;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px 8px;
+}
+
+.status-encerrada {
+    background-color: #f8d7da;
+    color: #721c24;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px 8px;
+}
+
+.link-mais-info {
+    color: #004d99;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-mais-info:hover {
+    text-decoration: underline;
+}
+
+.taxa-sim {
+    color: #dc3545;
+}
+
+.taxa-nao {
+    color: #28a745;
+}

@@ -1,0 +1,33 @@
+package br.edu.universidade.repositorio_extensao.model;
+
+/**
+ * Representa a pessoa responsável por uma Ação de Extensão.
+ * POJO padrão com construtor, getters e setters.
+ */
+public class Responsavel {
+    private String nome;
+    private String email;
+
+    // Construtor
+    public Responsavel(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+    }
+
+    // Getters e Setters (Necessários para Expression Language no JSP)
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}

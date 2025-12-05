@@ -1,0 +1,91 @@
+package br.edu.universidade.repositorio_extensao.service;
+
+import br.edu.universidade.repositorio_extensao.model.AcaoDeExtensao;
+import br.edu.universidade.repositorio_extensao.model.AcaoDeExtensao.Responsavel;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Simula a camada de acesso a dados (DAO/Repository).
+ * Contém Mock Data para demonstração.
+ */
+public class AcaoService {
+
+    private final List<AcaoDeExtensao> todasAcoes = new ArrayList<>();
+
+    public AcaoService() {
+        // Inicializa com dados de exemplo (Mock Data)
+        todasAcoes.add(new AcaoDeExtensao(
+                101,
+                "Curso de Inovação em Tecnologias Web (Front-end)",
+                "Vigente",
+                "Treinamento intensivo em React e Vue.js para estudantes de TI.",
+                "Este curso visa capacitar os participantes nas últimas tendências de desenvolvimento front-end, focando em frameworks modernos e práticas de UX.",
+                LocalDate.of(2025, 3, 1),
+                LocalDate.of(2025, 6, 30),
+                "Campus Central, Bloco B",
+                new Responsavel("Prof. João Silva", "joao.silva@uni.edu"),
+                true,
+                "https://universidade.br/inscricao-inovacao-web"
+        ));
+
+        todasAcoes.add(new AcaoDeExtensao(
+                205,
+                "Oficina de Libras para a Comunidade",
+                "Encerrada",
+                "Introdução à Língua Brasileira de Sinais, com foco em conversação básica.",
+                "Oficina gratuita realizada em parceria com a Secretaria de Educação Municipal, visando a inclusão e comunicação.",
+                LocalDate.of(2024, 9, 15),
+                LocalDate.of(2024, 10, 15),
+                "Polo Comunitário I",
+                new Responsavel("Profa. Maria Oliveira", "maria.oliver@uni.edu"),
+                false,
+                ""
+        ));
+        
+        todasAcoes.add(new AcaoDeExtensao(
+                300,
+                "Seminário de Sustentabilidade Urbana",
+                "Vigente",
+                "Discussão sobre soluções ecológicas para cidades modernas.",
+                "O seminário trará especialistas em planejamento urbano e ecologia para debater o futuro sustentável.",
+                LocalDate.of(2025, 5, 10),
+                LocalDate.of(2025, 5, 12),
+                "Auditório Principal",
+                new Responsavel("Dr. Carlos Mendes", "carlos.mendes@uni.edu"),
+                true,
+                "https://universidade.br/seminario-sustentabilidade"
+        ));
+    }
+
+    /**
+     * Busca ações de extensão aplicando filtros de termo e status.
+     * @param termoBusca Termo para buscar em título ou descrição.
+     * @param statusFiltro Status ('Vigente', 'Encerrada' ou 'Todos').
+     * @return Lista filtrada de AcaoDeExtensao.
+     */
+    public List<AcaoDeExtensao> buscarAcoes(String termoBusca, String statusFiltro) {
+        return todasAcoes.stream()
+            .filter(acao -> {
+                // Filtro por Status
+                boolean statusMatch = true;
+                if (statusFiltro != null && !statusFiltro.equalsIgnoreCase("Todos")) {
+                    statusMatch = acao.getStatus().equalsIgnoreCase(statusFiltro);
+                }
+
+                // Filtro por Termo de Busca (Título ou Descrição Curta)
+                boolean termoMatch = true;
+                if (termoBusca != null && !termoBusca.trim().isEmpty()) {
+                    String termo = termoBusca.toLowerCase().trim();
+                    termoMatch = acao.getTitulo().toLowerCase().contains(termo) ||
+                                 acao.getDescricaoCurta().toLowerCase().contains(termo);
+                }
+
+                return statusMatch && termoMatch;
+            })
+            .collect(Collectors.toList());
+    }
+}

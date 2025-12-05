@@ -1,0 +1,314 @@
+package br.edu.universidade.repositorio_extensao.service;
+
+import br.edu.universidade.repositorio_extensao.model.AcaoDeExtensao;
+import br.edu.universidade.repositorio_extensao.model.Responsavel;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class AcaoService {
+
+    private final List<AcaoDeExtensao> todasAcoes = new ArrayList<>();
+
+    public AcaoService() {
+    	
+    	// 1
+        todasAcoes.add(new AcaoDeExtensao(
+                101,
+                "Curso de Inovação em Tecnologias Web (Front-end)",
+                "Vigente",
+                "Treinamento intensivo em React e Vue.js para estudantes de TI.",
+                "Este curso visa capacitar os participantes nas últimas tendências de desenvolvimento front-end.",
+                LocalDate.of(2025, 3, 1),
+                LocalDate.of(2025, 6, 30),
+                "Campus Central, Bloco B",
+                new Responsavel("Prof. João Silva", "joao.silva@uni.edu"),
+                true,
+                "https://universidade.br/inscricao-inovacao-web"
+        ));
+
+        // 2
+        todasAcoes.add(new AcaoDeExtensao(
+                205,
+                "Oficina de Libras para a Comunidade",
+                "Encerrada",
+                "Introdução à Língua Brasileira de Sinais.",
+                "Oficina gratuita com foco em conversação básica e inclusão.",
+                LocalDate.of(2024, 9, 15),
+                LocalDate.of(2024, 10, 15),
+                "Polo Comunitário I",
+                new Responsavel("Profa. Maria Oliveira", "maria.oliver@uni.edu"),
+                false,
+                ""
+        ));
+        
+        // 3
+        todasAcoes.add(new AcaoDeExtensao(
+                300,
+                "Seminário de Sustentabilidade Urbana",
+                "Vigente",
+                "Discussão sobre soluções ecológicas para cidades modernas.",
+                "Evento com especialistas em ecologia e urbanismo.",
+                LocalDate.of(2025, 5, 10),
+                LocalDate.of(2025, 5, 12),
+                "Auditório Principal",
+                new Responsavel("Dr. Carlos Mendes", "carlos.mendes@uni.edu"),
+                true,
+                "https://universidade.br/seminario-sustentabilidade"
+        ));
+        
+        // 4
+        todasAcoes.add(new AcaoDeExtensao(
+                401,
+                "Curso de Primeiros Socorros para a Comunidade",
+                "Vigente",
+                "Capacitação prática em primeiros atendimentos.",
+                "Treinamento voltado para professores, servidores e comunidade externa, "
+                + "com simulações e certificação oficial.",
+                LocalDate.of(2025, 4, 5),
+                LocalDate.of(2025, 4, 20),
+                "Ginásio Poliesportivo",
+                new Responsavel("Enf. Laura Martins", "laura.martins@uni.edu"),
+                false,
+                ""
+        ));
+
+        // 5
+        todasAcoes.add(new AcaoDeExtensao(
+                402,
+                "Hackathon Universitário de Inovação Social",
+                "Vigente",
+                "Maratona de tecnologia para resolver problemas reais.",
+                "Equipes multidisciplinares trabalharão por 48 horas em soluções para "
+                + "desafios sociais envolvendo mobilidade, saúde e educação.",
+                LocalDate.of(2025, 6, 14),
+                LocalDate.of(2025, 6, 16),
+                "Laboratório de Inovação Tecnológica",
+                new Responsavel("Prof. Eduardo Ramos", "eduardo.ramos@uni.edu"),
+                true,
+                "https://universidade.br/hackathon-inovacao"
+        ));
+
+        // 6
+        todasAcoes.add(new AcaoDeExtensao(
+                403,
+                "Cine-Debate: Documentários Contemporâneos",
+                "Encerrada",
+                "Sessões temáticas de cinema seguidas de debates.",
+                "Atividade gratuita abordando questões sociais, ambientais e culturais, "
+                + "com participação de convidados especialistas.",
+                LocalDate.of(2024, 8, 1),
+                LocalDate.of(2024, 9, 30),
+                "Auditório Cultural",
+                new Responsavel("Profa. Renata Freitas", "renata.freitas@uni.edu"),
+                false,
+                ""
+        ));
+
+        // 7
+        todasAcoes.add(new AcaoDeExtensao(
+                404,
+                "Projeto Saúde na Praça",
+                "Encerrada",
+                "Ações de conscientização e atendimento básico.",
+                "Mutirão envolvendo estudantes e professores da área da saúde, com "
+                + "medições, orientações e atividades físicas.",
+                LocalDate.of(2024, 3, 12),
+                LocalDate.of(2024, 3, 12),
+                "Praça Municipal Central",
+                new Responsavel("Dr. Paulo Lima", "paulo.lima@uni.edu"),
+                false,
+                ""
+        ));
+
+        // 8
+        todasAcoes.add(new AcaoDeExtensao(
+                405,
+                "Feira de Profissões e Orientação Vocacional",
+                "Vigente",
+                "Exposição com cursos e carreira profissional.",
+                "Evento com palestras, oficinas e estandes de cursos da universidade, "
+                + "voltado para estudantes do ensino médio.",
+                LocalDate.of(2025, 8, 20),
+                LocalDate.of(2025, 8, 22),
+                "Centro de Convenções",
+                new Responsavel("Profa. Daniela Lopes", "daniela.lopes@uni.edu"),
+                false,
+                ""
+        ));
+
+        // 9
+        todasAcoes.add(new AcaoDeExtensao(
+                406,
+                "Oficina de Fotografia com Smartphone",
+                "Vigente",
+                "Dicas práticas para fotografar com celulares.",
+                "A oficina aborda técnicas de iluminação, composição, edição e narrativa visual.",
+                LocalDate.of(2025, 7, 4),
+                LocalDate.of(2025, 7, 5),
+                "Laboratório Multimídia",
+                new Responsavel("Prof. Lucas Andrade", "lucas.andrade@uni.edu"),
+                true,
+                "https://universidade.br/oficina-fotografia"
+        ));
+
+        // 10
+        todasAcoes.add(new AcaoDeExtensao(
+                407,
+                "Curso de Gestão Financeira Pessoal",
+                "Vigente",
+                "Conteúdo voltado para organização e educação financeira.",
+                "Curso com abordagens práticas sobre orçamento, dívidas, investimentos e planejamento.",
+                LocalDate.of(2025, 9, 1),
+                LocalDate.of(2025, 9, 30),
+                "Sala 203 - Bloco C",
+                new Responsavel("Prof. Bruno Ferraz", "bruno.ferraz@uni.edu"),
+                true,
+                ""
+        ));
+
+        // 11
+        todasAcoes.add(new AcaoDeExtensao(
+                408,
+                "Festival de Música Universitária",
+                "Prevista",
+                "Apresentações de bandas e artistas da comunidade.",
+                "Festival anual com seletivas, workshops e participação de músicos convidados.",
+                LocalDate.of(2025, 11, 10),
+                LocalDate.of(2025, 11, 12),
+                "Anfiteatro Externo",
+                new Responsavel("Profa. Helena Maia", "helena.maia@uni.edu"),
+                false,
+                ""
+        ));
+
+        // 12
+        todasAcoes.add(new AcaoDeExtensao(
+                409,
+                "Semana da Consciência Negra",
+                "Vigente",
+                "Atividades culturais e educativas.",
+                "Palestras, rodas de conversa, exposições e apresentações artísticas abordando identidades e diversidade.",
+                LocalDate.of(2025, 11, 18),
+                LocalDate.of(2025, 11, 22),
+                "Auditório Central",
+                new Responsavel("Prof. Rafael Souza", "rafael.souza@uni.edu"),
+                false,
+                "https://universidade.br/semana-consciencia-negra"
+        ));
+
+        // 13
+        todasAcoes.add(new AcaoDeExtensao(
+                410,
+                "Minicurso de Python para Iniciantes",
+                "Vigente",
+                "Introdução prática à programação em Python.",
+                "Conteúdo voltado para pessoas sem experiência prévia, cobrindo lógica, sintaxe e criação de pequenos projetos.",
+                LocalDate.of(2025, 3, 10),
+                LocalDate.of(2025, 4, 10),
+                "Laboratório de Computação 2",
+                new Responsavel("Prof. André Cavalcante", "andre.cavalcante@uni.edu"),
+                true,
+                "https://universidade.br/python-iniciantes"
+        ));
+        
+        // 14
+        todasAcoes.add(new AcaoDeExtensao(
+                411,
+                "Oficina de Robótica Educacional",
+                "Vigente",
+                "Aprendizado prático de robótica e programação de robôs.",
+                "Atividades voltadas para estudantes interessados em tecnologia e engenharia.",
+                LocalDate.of(2025, 4, 15),
+                LocalDate.of(2025, 5, 15),
+                "Laboratório de Robótica",
+                new Responsavel("Prof. Marina Souza", "marina.souza@uni.edu"),
+                true,
+                "https://universidade.br/robotica-educacional"
+        ));
+        
+        // 15
+        todasAcoes.add(new AcaoDeExtensao(
+                412,
+                "Seminário de Sustentabilidade e Meio Ambiente",
+                "Encerrada",
+                "Discussão sobre práticas sustentáveis em empresas e comunidades.",
+                "Palestras e debates com especialistas em sustentabilidade urbana e rural.",
+                LocalDate.of(2024, 10, 10),
+                LocalDate.of(2024, 10, 12),
+                "Auditório Central",
+                new Responsavel("Dr. Carlos Mendes", "carlos.mendes@uni.edu"),
+                false,
+                "https://universidade.br/seminario-sustentabilidade"
+        ));
+
+        // 16
+        todasAcoes.add(new AcaoDeExtensao(
+                413,
+                "Curso de Inglês para Negócios",
+                "Vigente",
+                "Capacitação em inglês com foco em negócios e comunicação profissional.",
+                "Ideal para estudantes e profissionais que desejam aprimorar suas habilidades no idioma.",
+                LocalDate.of(2025, 2, 5),
+                LocalDate.of(2025, 6, 5),
+                "Sala de Línguas 3",
+                new Responsavel("Prof. Helena Ribeiro", "helena.ribeiro@uni.edu"),
+                true,
+                "https://universidade.br/ingles-negocios"
+        ));
+
+        // 17
+        todasAcoes.add(new AcaoDeExtensao(
+                414,
+                "Workshop de Fotografia Digital",
+                "Encerrada",
+                "Aprenda técnicas de fotografia digital, edição e composição de imagens.",
+                "Oficina prática com exercícios de fotografia interna e externa.",
+                LocalDate.of(2024, 8, 1),
+                LocalDate.of(2024, 8, 15),
+                "Laboratório de Multimídia",
+                new Responsavel("Prof. Lucas Almeida", "lucas.almeida@uni.edu"),
+                false,
+                "https://universidade.br/workshop-fotografia"
+        ));
+
+        // 18
+        todasAcoes.add(new AcaoDeExtensao(
+                415,
+                "Minicurso de Inteligência Artificial",
+                "Vigente",
+                "Introdução à IA, aprendizado de máquina e redes neurais.",
+                "Oferece prática em Python e ferramentas de IA, voltado para iniciantes e intermediários.",
+                LocalDate.of(2025, 6, 1),
+                LocalDate.of(2025, 7, 15),
+                "Laboratório de Computação Avançada",
+                new Responsavel("Prof. Rafael Costa", "rafael.costa@uni.edu"),
+                true,
+                "https://universidade.br/ia-iniciantes"
+        ));
+        
+    }
+
+    public List<AcaoDeExtensao> buscarAcoes(String termoBusca, String statusFiltro) {
+        return todasAcoes.stream()
+            .filter(acao -> {
+
+                boolean statusMatch =
+                        (statusFiltro == null || statusFiltro.equalsIgnoreCase("Todos"))
+                        || acao.getStatus().equalsIgnoreCase(statusFiltro);
+
+                boolean termoMatch = true;
+                if (termoBusca != null && !termoBusca.trim().isEmpty()) {
+                    String termo = termoBusca.toLowerCase();
+                    termoMatch =
+                            acao.getTitulo().toLowerCase().contains(termo) ||
+                            acao.getDescricaoCurta().toLowerCase().contains(termo);
+                }
+
+                return statusMatch && termoMatch;
+            })
+            .collect(Collectors.toList());
+    }
+}

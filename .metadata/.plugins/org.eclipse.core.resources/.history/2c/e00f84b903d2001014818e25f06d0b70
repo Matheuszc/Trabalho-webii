@@ -1,0 +1,35 @@
+package br.edu.universidade.repositorio_extensao.controller;
+
+import br.edu.universidade.repositorio_extensao.model.AcaoDeExtensao;
+import br.edu.universidade.repositorio_extensao.service.AcaoService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet("/acoes")
+public class AcoesController extends HttpServlet {
+
+    private final AcaoService acaoService = new AcaoService();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String termoBusca = request.getParameter("busca");
+        String statusFiltro = request.getParameter("status");
+
+        List<AcaoDeExtensao> listaAcoes = acaoService.buscarAcoes(termoBusca, statusFiltro);
+
+        request.setAttribute("listaAcoes", listaAcoes);
+        request.setAttribute("termoBusca", termoBusca != null ? termoBusca : "");
+        request.setAttribute("statusFiltro", statusFiltro != null ? statusFiltro : "Todos");
+
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+}
